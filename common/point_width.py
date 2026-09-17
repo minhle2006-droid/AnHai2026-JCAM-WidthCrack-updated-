@@ -1,15 +1,4 @@
-"""
-point_width.py
---------------
-Tính W(p) THEO ĐỊNH NGHĨA (Definition 1) cho trường hợp S là đa giác đơn
-trong R^2, bằng cách xét TẤT CẢ cặp cạnh (e, f) của đa giác và tìm đoạn
-[u*, v*] ngắn nhất đi qua p với u* ∈ e, v* ∈ f (Section 5.1 của bài báo:
-"there are two edges e and f of the polygon having a common line segment").
 
-Đây là nghiệm CHÍNH XÁC (không xấp xỉ) dùng làm baseline để:
-- so sánh với kết quả xấp xỉ của Algorithm 1 (task1),
-- kiểm chứng điều kiện hội tụ (task2).
-"""
 
 import numpy as np
 from itertools import combinations
@@ -18,15 +7,7 @@ from common.geometry_utils import polygon_edges
 
 
 def _segment_through_point(p, seg_a, seg_b, seg_c, seg_d):
-    """
-    Tìm điểm u trên đoạn [seg_a, seg_b] và v trên đoạn [seg_c, seg_d] sao cho
-    p, u, v thẳng hàng và p ∈ [u, v]. Trả về (u, v) hoặc None.
 
-    Cách làm: với mỗi hướng ứng với 1 điểm trên cạnh 1, kiểm tra tia đối qua p
-    có cắt cạnh 2 không -- nhưng đơn giản và ổn định hơn: quét u chạy dọc cạnh 1
-    (tham số hoá), với mỗi u xác định tia p->u kéo dài, tìm giao với cạnh 2 ở
-    phía đối diện qua p, rồi tối thiểu hoá ||u-v||. Ta dùng tối ưu 1 biến (t in [0,1]).
-    """
     from scipy.optimize import minimize_scalar
 
     seg_a, seg_b = np.asarray(seg_a, float), np.asarray(seg_b, float)
@@ -70,14 +51,7 @@ def _segment_through_point(p, seg_a, seg_b, seg_c, seg_d):
 
 
 def width_at_point_polygon(p, vertices):
-    """
-    Tính W(p) chính xác (theo Definition 1 / Proposition 1) khi S là đa giác đơn.
-
-    Thuật toán: với mỗi cặp cạnh (e_i, e_j), i != j, tìm đoạn ngắn nhất [u,v],
-    u ∈ e_i, v ∈ e_j, đi qua p; W(p) = min trên tất cả các cặp cạnh hợp lệ.
-
-    Trả về (W_p, u*, v*).
-    """
+  
     edges = polygon_edges(vertices)
     best = None
     best_uv = None
