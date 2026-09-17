@@ -6,8 +6,6 @@ Các hàm hình học cơ bản dùng chung cho toàn bộ repo:
 - Giao điểm của một tia/đường thẳng qua điểm p với biên ∂S.
 - Kiểm tra điểm nằm trong / trên biên đa giác.
 
-Quy ước: S là đa giác đơn (simple polygon), cho bởi list các đỉnh
-[(x0,y0), (x1,y1), ..., (xn-1,yn-1)] theo thứ tự (không lặp đỉnh đầu ở cuối).
 """
 
 import numpy as np
@@ -37,13 +35,7 @@ def is_point_inside_polygon(point, vertices):
 
 
 def ray_segment_intersection(p, direction, seg_a, seg_b):
-    """
-    Tìm giao điểm của tia xuất phát từ p theo hướng `direction` (vector 2D, không
-    nhất thiết chuẩn hoá) với đoạn thẳng [seg_a, seg_b].
-
-    Trả về (t, point) nếu có giao điểm với t > 0 (t là tham số dọc tia: p + t*direction),
-    hoặc None nếu không giao hoặc song song.
-    """
+   
     p = np.asarray(p, dtype=float)
     d = np.asarray(direction, dtype=float)
     a = np.asarray(seg_a, dtype=float)
@@ -64,12 +56,7 @@ def ray_segment_intersection(p, direction, seg_a, seg_b):
 
 
 def line_boundary_intersections(p, direction, vertices):
-    """
-    Tìm TẤT CẢ giao điểm của ĐƯỜNG THẲNG qua p theo hướng `direction`
-    (cả hai phía, tức tia +d và tia -d) với biên ∂S (đa giác vertices).
-
-    Trả về list các điểm giao (có thể nhiều hơn 2 nếu đa giác không lồi).
-    """
+  
     pts = []
     for seg_a, seg_b in polygon_edges(vertices):
         for sign in (1, -1):
@@ -81,13 +68,7 @@ def line_boundary_intersections(p, direction, vertices):
 
 
 def closest_pair_straddling_p(p, direction, vertices):
-    """
-    Trong số các giao điểm của đường thẳng qua p (hướng `direction`) với ∂S,
-    chọn ra cặp (u, v) GẦN p NHẤT về hai phía sao cho p ∈ [u, v] và ]u,v[ ⊂ S
-    (theo Proposition 1 / Lemma 1: tồn tại u,v gần nhất về 2 phía).
-
-    Trả về (u, v, ||u-v||) hoặc None nếu không tìm được đủ 2 phía.
-    """
+   
     hits = line_boundary_intersections(p, direction, vertices)
     if not hits:
         return None
