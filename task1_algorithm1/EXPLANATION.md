@@ -1,6 +1,6 @@
 # Task 1 — Algorithm 1: triển khai & phân tích tính hội tụ
 
-## 1. Tóm tắt thuật toán (đúng theo tài liệu)
+## 1. Tóm tắt thuật toán
 
 **Input:** `n > 1`, tập compact `S`, điểm `p ∈ int(S)`.
 **Output:** `F(n) = { ||u_i - v_i|| : u_i, v_i ∈ ∂S, p ∈ [u_i, v_i], i = 1,...,2^(n-1) }`
@@ -52,7 +52,7 @@ Theo **Proposition 1**, `W(p)` được đạt (là minimum, không chỉ infimu
 Algorithm 1 chỉ kiểm tra một **lưới hữu hạn, cách đều, được xác định trước** các
 hướng `θ₀ + kπ/2^(n-1)`. Có 2 trường hợp:
 
-- **Nếu `d*` "may mắn" rơi đúng vào lưới hướng này với `n` đủ lớn** (ví dụ: `S` có
+- **Nếu `d*` rơi đúng vào lưới hướng này với `n` đủ lớn** (ví dụ: `S` có
   đối xứng khiến hướng tối ưu là hướng chia đôi tự nhiên của `θ₀`) → thuật toán hội
   tụ **đúng** về `W_S(p)`. Đây là trường hợp minh hoạ trong `algorithm1.py` (hình
   chữ nhật, `p` là tâm, hướng tối ưu trùng trục đối xứng).
@@ -63,7 +63,7 @@ hướng `θ₀ + kπ/2^(n-1)`. Có 2 trường hợp:
   dãy chỉ hội tụ về infimum của các giá trị tương ứng lưới hướng — có thể **lớn hơn**
   `W_S(p)` một khoảng cố định, KHÔNG tiến về 0.
 
-**Ví dụ cụ thể (xem `../task2_convergence_conditions/counterexample.ipynb`):**
+**Ví dụ (xem `../task2_convergence_conditions/counterexample.ipynb`):**
 Với đa giác không lồi như *Example 3* trong bài báo (điểm `p_0` mà `x ↦ W(x)`
 không liên tục), hướng đạt `W(p_0)` là hướng cố định `(0,3)-(0,-1)` (trục Oy). Nếu
 ta chọn `θ₀` sao cho trục Oy **không bao giờ** nằm trong lưới `{θ₀ + kπ/2^(n-1)}`
